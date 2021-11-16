@@ -92,7 +92,7 @@ def column_trans(schema_property):
 
 
 def safe_column_name(name):
-    return '"{}"'.format(name).upper()
+    return '"{}"'.format(name).upper().replace(' ', '_').replace('.', '_').replace('-', '_')
 
 
 def column_clause(name, schema_property):
@@ -119,6 +119,8 @@ def flatten_schema(d, parent_key=[], sep='__', level=0, max_level=0):
         return {}
 
     for k, v in d['properties'].items():
+        if 'anyOf' in v:
+            v = v['anyOf'][0]
         new_key = flatten_key(k, parent_key, sep)
         if 'type' in v.keys():
             if 'object' in v['type'] and 'properties' in v and level < max_level:
@@ -345,7 +347,7 @@ class DbSync:
     def table_name(self, stream_name, is_stage=False, without_schema=False):
         stream_dict = stream_name_to_dict(stream_name)
         table_name = stream_dict['table_name']
-        rs_table_name = table_name.replace('.', '_').replace('-', '_').lower()
+        rs_table_name = table_name.replace('.', '_').replace('-', '_').replace(' ', '_').lower()
 
         if is_stage:
             rs_table_name = 'stg_{}'.format(rs_table_name)
