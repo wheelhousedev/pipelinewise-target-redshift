@@ -645,7 +645,7 @@ class DbSync:
         else:
             columns = self.get_table_columns(self.schema_name, table_name)
 
-        columns_dict = {column['column_name'].lower(): column for column in columns}
+        columns_dict = {safe_column_name(column['column_name']): column for column in columns}
 
         columns_to_add = [
             column_clause(
@@ -653,7 +653,7 @@ class DbSync:
                 properties_schema
             )
             for (name, properties_schema) in self.flatten_schema.items()
-            if name.lower() not in columns_dict
+            if safe_column_name(name) not in columns_dict
         ]
 
         for column in columns_to_add:
@@ -665,8 +665,8 @@ class DbSync:
                 properties_schema
             ))
             for (name, properties_schema) in self.flatten_schema.items()
-            if name.lower() in columns_dict and
-               columns_dict[name.lower()]['data_type'].lower() != column_type(properties_schema, with_length=False).lower() and
+            if safe_column_name(name) in columns_dict and
+               columns_dict[safe_column_name(name)]['data_type'].lower() != column_type(properties_schema, with_length=False).lower() and
 
                # Don't alter table if 'timestamp without time zone' detected as the new required column type
                #
