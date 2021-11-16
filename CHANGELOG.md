@@ -1,3 +1,8 @@
+1.7.0 (2021-11-16)
+-------------------
+- Replace periods, dashes, and spaces in table and column names with underscores
+- Automatically select the first data type in `anyOf` records
+
 1.6.0 (2020-08-03)
 -------------------
 

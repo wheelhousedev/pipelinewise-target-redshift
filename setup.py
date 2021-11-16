@@ -3,7 +3,7 @@
 from setuptools import setup
 
 setup(name="pipelinewise-target-redshift",
-      version="1.6.0",
+      version="1.7.0",
       description="Singer.io target for loading data to Amazon Redshift - PipelineWise compatible",
       author="TransferWise",
       url='https://github.com/transferwise/pipelinewise-target-redshift',
