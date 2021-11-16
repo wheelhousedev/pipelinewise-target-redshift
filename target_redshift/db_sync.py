@@ -92,7 +92,7 @@ def column_trans(schema_property):
 
 
 def safe_column_name(name):
-    return '"{}"'.format(name).upper()
+    return '"{}"'.format(name).upper().replace(' ', '_').replace('.', '_').replace('-', '_')
 
 
 def column_clause(name, schema_property):
