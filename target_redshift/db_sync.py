@@ -119,6 +119,8 @@ def flatten_schema(d, parent_key=[], sep='__', level=0, max_level=0):
         return {}
 
     for k, v in d['properties'].items():
+        if 'anyOf' in v:
+            v = v['anyOf'][0]
         new_key = flatten_key(k, parent_key, sep)
         if 'type' in v.keys():
             if 'object' in v['type'] and 'properties' in v and level < max_level:
