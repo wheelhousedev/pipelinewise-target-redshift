@@ -2,14 +2,10 @@
 
 from setuptools import setup
 
-with open('README.md') as f:
-    long_description = f.read()
-
 setup(name="pipelinewise-target-redshift",
       version="1.6.0",
       description="Singer.io target for loading data to Amazon Redshift - PipelineWise compatible",
       long_description=long_description,
-      long_description_content_type='text/markdown',
       author="TransferWise",
       url='https://github.com/transferwise/pipelinewise-target-redshift',
       classifiers=[
