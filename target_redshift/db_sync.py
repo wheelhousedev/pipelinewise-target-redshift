@@ -347,7 +347,7 @@ class DbSync:
     def table_name(self, stream_name, is_stage=False, without_schema=False):
         stream_dict = stream_name_to_dict(stream_name)
         table_name = stream_dict['table_name']
-        rs_table_name = table_name.replace('.', '_').replace('-', '_').lower()
+        rs_table_name = table_name.replace('.', '_').replace('-', '_').replace(' ', '_').lower()
 
         if is_stage:
             rs_table_name = 'stg_{}'.format(rs_table_name)
